@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+
+<body>
+    <main>
+        <table class="table" border="1">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome cliente</th>
+                <th>Valor</th>
+                <th>data</th>
+                <th colspan="2">Ações</th>
+            </tr>
+            </thead>
+            <tr th:each="v : ${vendas}">
+                <td th:text="${v.id}"> </td>
+                <td th:text="${v.pessoa.nome}"> </td>
+                <td th:text="${v.Total()}"> </td>
+                <td th:text="${v.data}"> </td>
+                <td> <a th:href="@{/venda/list/{id}(id=${v.id})}">Detalhes</a> </td>
+                </tr>
+        </table>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

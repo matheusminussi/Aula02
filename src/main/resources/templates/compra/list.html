@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+
+<body>
+<main>
+
+    <h2>Produtos a venda</h2>
+
+    <table class="table" border="1">
+        <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Valor</th>
+            <th>quantidade</th>
+            <th colspan="2">Ações</th>
+        </tr>
+        </thead>
+        <tr th:each="p : ${produtos}">
+            <td th:text="${p.descricao}"> </td>
+            <td th:text="${p.valor}"> </td>
+
+
+
+            <form th:action="${venda.id == 0} ? @{/venda/save} : @{/venda/update}" th:object="${venda}" method="post">
+                <input type="hidden" th:field="*{p.id}">
+                <input type="hidden" th:field="*{p.descricao}" placeholder="descricao">
+                <input type="hidden" th:field="*{p.valor}" placeholder="valor">
+                <input type="submit" value="Enviar">
+            </form>
+
+
+            <!--<form th:action="@{/venda/save}" method="post">
+                <input type="hidden" th:value="${p.id}" th:name="produto.id">
+                <td><input type="text" th:field=""></td>
+                <td><input type="submit" value="add"></td>
+            </form>-->
+
+        </tr>
+    </table>
+
+
+</main>
+</body>
+</html>

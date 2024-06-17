@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+
+<body>
+     <main>
+        <h1>Compra</h1>
+        <h2 th:text="'Cliente: ' + ${venda.pessoa.getNome()}"> </h2>
+
+        <table class="table" border="1">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Itens</th>
+                <th>Quantidade</th>
+                <th>Valor Unitario</th>
+                <th>Data da venda</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${venda.itens}">
+                <td th:text="${item.id}"></td>
+
+                <td th:text="${item.produto.descricao}"> </td>
+                <td th:text="${item.quantidade}"> </td>
+
+                <td th:text="${item.produto.valor}"></td>
+                <td th:text="${venda.data}"></td>
+
+            </tr>
+
+
+
+            </tbody>
+        </table>
+    </main>
+     <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

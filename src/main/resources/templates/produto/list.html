@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+
+<body>
+    <main>
+        <div id="cadastro">
+        <fieldset>
+            <legend>Casdastrar  novos produtos</legend>
+            <a class="btn btn-primary" href="/produto/form" role="button">Cadastrar</a>
+        </fieldset>
+        </div>
+        <div>
+            <h2></h2>
+        </div>
+
+        <table class="table" border="1">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descricao</th>
+                <th>Valor</th>
+                <th colspan="2">Ações</th>
+            </tr>
+            </thead>
+            <tr th:each="p : ${produtos}">
+                <td th:text="${p.id}"> </td>
+                <td th:text="${p.descricao}"> </td>
+                <td th:text="${p.valor}"> </td>
+
+                <td> <a th:href="@{/produto/edit/{id}(id=${p.id})}">Editar</a> </td>
+                <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/produto/remove/{id}(id=${p.id})}">Excluir</a> </td>
+            </tr>
+        </table>
+    </main>
+</body>
+</html>
