@@ -3,6 +3,28 @@ insert into produto (descricao,valor)values ('Camisa', 10.00);
 insert into produto (descricao,valor)values ('Relogio', 20.00);
 insert into produto (descricao,valor)values ('Maionese', 9.00);
 
+/*TESTES DE PRODUTOS PARA AUMENTAR PAGINA */
+/*
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+insert into produto (descricao,valor)values ('Maionese', 9.00);
+*/
+
 
 /*Pessoa fisica*/
 insert into pessoa (id,nome)values (1,'Matheus');
@@ -26,6 +48,7 @@ insert into pessoajuridica (id_pessoa,cnpj)values (4,'321321000111');
 /*cria as vendas*/
 insert into venda (data,pessoa_id)values ('2024-04-12',1);
 insert into venda (data,pessoa_id)values ('2024-04-11',4);
+insert into venda (data,pessoa_id)values ('2024-04-10',3);
 insert into venda (data,pessoa_id)values ('2024-04-10',3);
 
 

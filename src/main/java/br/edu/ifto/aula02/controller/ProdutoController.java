@@ -17,17 +17,14 @@ public class ProdutoController {
     @Autowired
     ProdutoRepository repository;
 
-
     public ProdutoController(){
         repository = new ProdutoRepository();
     }
 
-
     @GetMapping("/form")
-    public String form(Produto produto){
+    public String form(Produto produto) {
         return "/produto/form";
     }
-
 
     @GetMapping("/list")
     public ModelAndView listar(ModelMap model) {
@@ -47,9 +44,8 @@ public class ProdutoController {
         return new ModelAndView("redirect:/produto/list");
     }
 
-
     @GetMapping("/remove/{id}")
-    public ModelAndView remove(@PathVariable("id") Long id){
+    public ModelAndView remove(@PathVariable("id") Long id) {
         repository.remove(id);
         return new ModelAndView("redirect:/produto/list");
     }
@@ -60,12 +56,9 @@ public class ProdutoController {
         return new ModelAndView("/produto/form", model);
     }
 
-
     @PostMapping("/update")
     public ModelAndView update(Produto produto) {
         repository.update(produto);
         return new ModelAndView("redirect:/produto/list");
     }
-
-
 }

@@ -19,6 +19,7 @@ public abstract class Pessoa {
     @OneToMany(mappedBy = "pessoa")
     List<Venda> vendas = new ArrayList<>();
 
+
     public Long getId() {
         return id;
     }

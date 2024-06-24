@@ -11,15 +11,14 @@ public class ItemVenda implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-    private Double quantidade;
+    private Double quantidade = 0.0;
     @ManyToOne
     private Produto produto;
     @ManyToOne
     private Venda venda;
 
-    public ItemVenda(double v, Produto produto, Object o) {
 
-    }
+    public ItemVenda() {}
 
     public Long getId() {
         return id;

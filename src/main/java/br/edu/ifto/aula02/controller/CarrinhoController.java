@@ -1,9 +1,8 @@
 package br.edu.ifto.aula02.controller;
 
 import br.edu.ifto.aula02.model.dao.ProdutoRepository;
-import br.edu.ifto.aula02.model.entity.ItemVenda;
-import br.edu.ifto.aula02.model.entity.Produto;
-import br.edu.ifto.aula02.model.entity.Venda;
+import br.edu.ifto.aula02.model.dao.VendaRepository;
+import br.edu.ifto.aula02.model.entity.*;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Controller
@@ -22,79 +23,43 @@ public class CarrinhoController {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+    private VendaRepository vendaRepository;
 
-    @GetMapping("/add/{id}")
-    public ModelAndView addProduto(@PathVariable("id") Long id, HttpSession session) {
-        Produto produto = produtoRepository.produto(id);
-        if (produto == null) {
-            return new ModelAndView("redirect:/produto/list");
-        }
+    private List<ItemVenda> itemVendas = new ArrayList<ItemVenda>();
 
-        List<ItemVenda> carrinho = (List<ItemVenda>) session.getAttribute("carrinho");
-        if (carrinho == null) {
-            carrinho = new ArrayList<>();
-        }
-
-        boolean encontrado = false;
-        for (ItemVenda item : carrinho) {
-            if (item.getProduto().getId().equals(id)) {
-                item.setQuantidade(item.getQuantidade() + 1);
-                encontrado = true;
-                break;
-            }
-        }
-
-        if (!encontrado) {
-            carrinho.add(new ItemVenda(1.0, produto, null));
-        }
-
-        session.setAttribute("carrinho", carrinho);
-        return new ModelAndView("redirect:/produto/list");
+    @GetMapping("/list")
+    public ModelAndView listar(ModelMap model) {
+        model.addAttribute("produtos", produtoRepository.produtos());
+        model.addAttribute("venda", new Venda());
+        return new ModelAndView("/compra/list");
     }
 
-    @GetMapping
-    public String viewCarrinho(ModelMap model, HttpSession session) {
-        List<ItemVenda> carrinho = (List<ItemVenda>) session.getAttribute("carrinho");
-        model.addAttribute("carrinho", carrinho);
+    @GetMapping("/adicionarCarrinho/{id}")
+    public ModelAndView adicionarCarrinho(@PathVariable Long id) {
+        System.out.println("ID PRODUTO: " + id); // Aqui chega
+        Produto produto = produtoRepository.produto(id);//acho o produto pelo id
+        Venda v = new Venda();
+        v.setId(41L);
+        v.setData(LocalDateTime.now());
 
-        double total = 0.0;
-        if (carrinho != null) {
-            for (ItemVenda item : carrinho) {
-                total += item.getQuantidade() * item.getProduto().getValor();
-            }
-        }
-        model.addAttribute("total", total);
+        Pessoafisica pessoafisicaTeste = new Pessoafisica();
+        pessoafisicaTeste.setId(41L);
+        pessoafisicaTeste.setNome("Pessoa teste");
 
-        return "/carrinho/view";
-    }
+        v.setPessoa(pessoafisicaTeste);
 
-    @GetMapping("/remove/{id}")
-    public ModelAndView removeProduto(@PathVariable("id") Long id, HttpSession session) {
-        List<ItemVenda> carrinho = (List<ItemVenda>) session.getAttribute("carrinho");
-        if (carrinho != null) {
-            carrinho.removeIf(item -> item.getProduto().getId().equals(id));
-        }
-        session.setAttribute("carrinho", carrinho);
-        return new ModelAndView("redirect:/carrinho");
-    }
+        ItemVenda item = new ItemVenda();
+        item.setProduto(produto);
+        item.setQuantidade(1.0);
+        item.setVenda(v);
+        item.setId(41L);
 
-    @PostMapping("/finalizar")
-    public ModelAndView finalizarVenda(HttpSession session) {
-        List<ItemVenda> carrinho = (List<ItemVenda>) session.getAttribute("carrinho");
-        if (carrinho == null || carrinho.isEmpty()) {
-            return new ModelAndView("redirect:/carrinho");
-        }
+        itemVendas.add(item);
 
-        Venda venda = new Venda();
-        venda.setItens(carrinho);
-        for (ItemVenda item : carrinho) {
-            item.setVenda(venda);
-        }
+        ModelAndView mv = new ModelAndView();
 
-        session.removeAttribute("carrinho");
-        // Supondo que tenha um VendaRepository para salvar a venda
-        // vendaRepository.save(venda);
-
-        return new ModelAndView("redirect:/venda/list");
+        ModelMap mp = new ModelMap();
+        mp.addAttribute("carrinho",itemVendas);
+        return new ModelAndView("/compra/view", mp);
     }
 }
