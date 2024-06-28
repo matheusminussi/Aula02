@@ -1,6 +1,8 @@
 package br.edu.ifto.aula02.model.entity;
 
 import jakarta.persistence.*;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,6 +10,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
+@Scope("session")
 @Entity
 public class Venda implements Serializable {
 
@@ -16,7 +20,7 @@ public class Venda implements Serializable {
     private Long id;
     private LocalDateTime data;
 
-    @OneToMany(mappedBy = "venda")
+    @OneToMany(mappedBy = "venda",cascade = CascadeType.ALL)
     private List<ItemVenda> itens = new ArrayList<>();
 
     @ManyToOne

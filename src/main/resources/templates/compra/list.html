@@ -40,7 +40,7 @@
             <div class="card-body">
                 <h5 class="card-title" th:text="${p.descricao}"></h5>
                 <p class="card-text" th:text="${'R$' + p.valor}"></p>
-                <a th:href="@{/carrinho/adicionarCarrinho/{id}(id=${p.id})}" class="btn btn-primary ">Comprar</a>
+                <a th:href="@{/venda/adicionarCarrinho/{id}(id=${p.id})}" class="btn btn-primary ">Comprar</a>
             </div>
         </div>
     </div>

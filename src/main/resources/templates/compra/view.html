@@ -17,27 +17,30 @@
                 <th>Ações</th>
             </tr>
             </thead>
+
             <tbody>
-            <tr th:each="item : ${carrinho}">
+            <tr th:each="item : ${session.venda.itens}">
                 <td th:text="${item.produto.descricao}">Descrição</td>
                 <td th:text="${item.quantidade}">Quantidade</td>
                 <td th:text="${item.produto.valor}">Valor Unitário</td>
                 <td th:text="${item.quantidade * item.produto.valor}">Total</td>
                 <td>
-                    <!-- <a th:href="@{/carrinho/remove/{id}(id=${item.produto.id})}">Remover</a> -->
-                    <button th:href="@{/carrinho/remove/{id}(id=${item.produto.id})}" type="button" class="btn btn-danger">Remover</button>
+                    <a th:href="@{/venda/removerCarrinho/{id}(id=${item.produto.id})}" class="btn btn-danger">Remover</a>
                 </td>
             </tr>
             </tbody>
         </table>
         <div class="row justify-content-around">
             <div class="col">
-                <form action="/carrinho/finalizar" method="post">
+               <!-- <form th:href="@{/venda/finalizarCarrinho}" method="Get">
                     <button type="submit" class="btn btn-success btn-lg ">Finalizar Compra</button>
-                </form>
+                </form>-->
+
+                <a th:href="@{/venda/finalizarCarrinho}" class="btn btn-success btn-lg">Finalizar Compra</a>
+
             </div>
             <div class="col">
-                <a th:href="@{/carrinho/list}" class="btn btn-secondary btn-lg">Continuar Comprando</a>
+                <a th:href="@{/venda/listarProdutos}" class="btn btn-secondary btn-lg">Continuar Comprando</a>
             </div>
         </div>
     </main>

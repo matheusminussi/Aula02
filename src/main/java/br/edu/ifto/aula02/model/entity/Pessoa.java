@@ -35,4 +35,12 @@ public abstract class Pessoa {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public List<Venda> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(List<Venda> vendas) {
+        this.vendas = vendas;
+    }
 }

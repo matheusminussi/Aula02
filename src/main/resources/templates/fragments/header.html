@@ -3,7 +3,7 @@
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{/carrinho/list}">LOJA</a>
+            <a class="navbar-brand" th:href="@{/venda/listarProdutos}">LOJA</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -28,6 +28,10 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link">Sair</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/venda/listCarrinho}">CARRINHO</a>
                     </li>
                 </ul>
                 <!--<form class="d-flex" role="search">

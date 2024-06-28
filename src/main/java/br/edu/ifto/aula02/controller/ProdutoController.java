@@ -4,12 +4,14 @@ import br.edu.ifto.aula02.model.dao.ProdutoRepository;
 import br.edu.ifto.aula02.model.entity.Produto;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Transactional
+@Scope("request")
 @Controller
 @RequestMapping("produto")
 public class ProdutoController {

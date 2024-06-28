@@ -1,6 +1,6 @@
 package br.edu.ifto.aula02.model.dao;
 
-import br.edu.ifto.aula02.model.entity.Produto;
+import br.edu.ifto.aula02.model.entity.Pessoa;
 import br.edu.ifto.aula02.model.entity.Venda;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -9,33 +9,33 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
 @Repository
-public class VendaRepository {
+public class PessoaRepository {
 
     @PersistenceContext
     private EntityManager em;
 
-    public void save(Venda venda){
-        em.persist(venda);
+    public void save(Pessoa pessoa){
+        em.persist(pessoa);
     }
 
-    public Venda venda(Long id){
-        return em.find(Venda.class, id);
+    public Pessoa pessoa(Long id){
+        return em.find(Pessoa.class, id);
     }
 
-    public List<Venda> Vendas(){
-        Query query = em.createQuery("from Venda");
+    public List<Pessoa> Pessoas(){
+        Query query = em.createQuery("from Pessoa");
         return query.getResultList();
     }
 
     public void remove(Long id){
-        Venda v = em.find(Venda.class, id);
-        em.remove(v);
+        Pessoa p = em.find(Pessoa.class, id);
+        em.remove(p);
     }
 
-    public void update(Venda venda){
-        em.merge(venda);
+    public void update(Pessoa pessoa){
+        em.merge(pessoa);
     }
+
 
 }
