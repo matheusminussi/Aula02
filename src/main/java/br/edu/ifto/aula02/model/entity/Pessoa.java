@@ -1,6 +1,7 @@
 package br.edu.ifto.aula02.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ public abstract class Pessoa {
     @Id
     @GeneratedValue
     private Long id;
-
+    @NotBlank
     private String nome;
 
     @OneToMany(mappedBy = "pessoa")

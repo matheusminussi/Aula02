@@ -7,11 +7,21 @@
 <body>
     <main>
         <h1>Cadastrar produto</h1>
-            <form th:action="${produto.id == 0} ? @{/produto/save} : @{/produto/update}" th:object="${produto}" method="post">
+            <form th:action="${produto.id == null} ? @{/produto/save} : @{/produto/update}" th:object="${produto}" method="post">
                 <input type="hidden" th:field="*{id}">
-                <input type="text" th:field="*{descricao}" placeholder="descricao">
-                <input type="text" th:field="*{valor}" placeholder="valor">
-                <input type="submit" value="Enviar">
+                <div style="width: 20rem; height: 5rem; margin-top: 50px">
+                    <label>Nome do produto:</label>
+                    <input type="text" th:field="*{descricao}" th:errorclass="is-invalid" placeholder="descricao">
+                    <label class="invalid-feedback" th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></label>
+                </div>
+
+                <div style="width: 15rem; height: 5rem; margin-top: 2px">
+                    <label>Valor do produto:</label>
+                    <input type="text" th:field="*{valor}" th:errorclass="is-invalid" placeholder="valor">
+                    <label class="invalid-feedback" th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"></label>
+
+                </div>
+                <input type="submit" class="btn btn-primary btn-lg" value="Enviar">
             </form>
     </main>
 

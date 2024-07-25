@@ -77,16 +77,13 @@ public class VendaController {
     public ModelAndView finalizarCarrinho(HttpSession session) {
 
         Pessoa p = pessoaRepository.pessoa(1L);
-
         venda.setData(LocalDateTime.now());
         venda.setPessoa(p);
         p.getVendas().add(venda);
 
-
         repository.save(venda);
         session.invalidate();
         return new ModelAndView("redirect:/venda/list");
-
     }
 
 

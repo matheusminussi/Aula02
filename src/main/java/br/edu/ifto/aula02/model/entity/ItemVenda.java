@@ -1,6 +1,7 @@
 package br.edu.ifto.aula02.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 

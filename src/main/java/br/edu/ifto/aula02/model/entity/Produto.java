@@ -1,6 +1,8 @@
 package br.edu.ifto.aula02.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 import java.io.Serializable;
 
@@ -10,7 +12,9 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
+    @NotBlank(message = "É obrigatorio inserir o nome do produto")
     private String descricao;
+    @Min(1)
     private double valor;
 
     public Long getId() {

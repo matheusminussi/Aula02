@@ -3,10 +3,12 @@ package br.edu.ifto.aula02.controller;
 import br.edu.ifto.aula02.model.dao.ProdutoRepository;
 import br.edu.ifto.aula02.model.entity.Produto;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,8 +26,8 @@ public class ProdutoController {
     }
 
     @GetMapping("/form")
-    public String form(Produto produto) {
-        return "/produto/form";
+    public ModelAndView form(Produto produto) {
+        return new ModelAndView("/produto/form");
     }
 
     @GetMapping("/list")
@@ -41,7 +43,10 @@ public class ProdutoController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(@ModelAttribute("produto") Produto produto) {
+    public ModelAndView save(@ModelAttribute("produto")@Valid Produto produto, BindingResult result) {
+        if(result.hasErrors())
+            return form(produto);
+
         repository.save(produto);
         return new ModelAndView("redirect:/produto/list");
     }
@@ -59,7 +64,10 @@ public class ProdutoController {
     }
 
     @PostMapping("/update")
-    public ModelAndView update(Produto produto) {
+    public ModelAndView update(@Valid Produto produto, BindingResult result) {
+        if(result.hasErrors())
+            return form(produto);
+
         repository.update(produto);
         return new ModelAndView("redirect:/produto/list");
     }
