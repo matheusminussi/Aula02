@@ -6,11 +6,13 @@ import br.edu.ifto.aula02.model.dao.VendaRepository;
 import br.edu.ifto.aula02.model.entity.*;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -116,7 +118,10 @@ public class VendaController {
 
 
     @PostMapping("/save")
-    public ModelAndView save(@ModelAttribute("venda") Venda venda) {
+    public ModelAndView save(@ModelAttribute("venda")@Valid Venda venda, BindingResult result) {
+        if(result.hasErrors())
+            return new ModelAndView("compra/list");
+
         repository.save(venda);
         return new ModelAndView("redirect:/venda/list");
     }

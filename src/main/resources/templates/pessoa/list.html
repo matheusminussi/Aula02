@@ -1,30 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+
 <body>
+    <main>
+        <h1>Pessoas cadastradas</h1>
 
+        <table class="table" border="1">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>nome</th>
+                <th colspan="2">Ações</th>
+            </tr>
+            </thead>
+            <tr th:each="p : ${pessoas}">
+                <td th:text="${p.id}"> </td>
+                <td th:text="${p.nome}"> </td>
 
-<table class="table" border="1">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Descricao</th>
-        <th>Valor</th>
-        <th colspan="2">Ações</th>
-    </tr>
-    </thead>
-    <tr th:each="p : ${produtos}">
-        <td th:text="${p.id}"> </td>
-        <td th:text="${p.descricao}"> </td>
-        <td th:text="${p.valor}"> </td>
-
-        <td> <a th:href="@{/pessoas/edit/{id}(id=${p.id})}">Editar</a> </td>
-        <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>
-    </tr>
-</table>
-
+                <td> <a th:href="@{/pessoas/edit/{id}(id=${p.id})}">Editar</a> </td>
+                <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>
+            </tr>
+        </table>
+    </main>
 </body>
 </html>

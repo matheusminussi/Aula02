@@ -1,6 +1,7 @@
 package br.edu.ifto.aula02.model.dao;
 
 import br.edu.ifto.aula02.model.entity.Pessoa;
+import br.edu.ifto.aula02.model.entity.Pessoafisica;
 import br.edu.ifto.aula02.model.entity.Venda;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -19,11 +20,15 @@ public class PessoaRepository {
         em.persist(pessoa);
     }
 
+    public void saveFisica(Pessoafisica pf){
+        em.persist(pf);
+    }
+
     public Pessoa pessoa(Long id){
         return em.find(Pessoa.class, id);
     }
 
-    public List<Pessoa> Pessoas(){
+    public List<Pessoa> pessoas(){
         Query query = em.createQuery("from Pessoa");
         return query.getResultList();
     }

@@ -40,4 +40,5 @@ public class Produto implements Serializable {
     public void setValor(double valor) {
         this.valor = valor;
     }
+
 }

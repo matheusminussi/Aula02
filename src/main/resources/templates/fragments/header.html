@@ -15,13 +15,16 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" th:href="@{/produto/list}">Produtos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/pessoa/list}">Pessoas</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Cadastrar
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Vendas</a></li>
                             <li><a class="dropdown-item" th:href="@{/produto/form}">Produtos</a></li>
+                            <li><a class="dropdown-item" th:href="@{/pessoa/form}">Clientes</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Funcionario</a></li>
                         </ul>

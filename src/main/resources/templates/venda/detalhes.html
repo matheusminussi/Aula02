@@ -27,7 +27,7 @@
                 <td th:text="${item.quantidade}"> </td>
 
                 <td th:text="${item.produto.valor}"></td>
-                <td th:text="${venda.data}"></td>
+                <td th:text="${venda.data.toLocalDate()}"></td>
 
             </tr>
 
