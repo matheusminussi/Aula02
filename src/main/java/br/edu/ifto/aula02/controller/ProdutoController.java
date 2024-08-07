@@ -7,10 +7,13 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Transactional
 @Scope("request")
@@ -71,4 +74,20 @@ public class ProdutoController {
         repository.update(produto);
         return new ModelAndView("redirect:/produto/list");
     }
+
+
+
+    @GetMapping("/filtrarnome")
+    public ModelAndView filtrarNome(String nome, Model model) {
+
+        System.out.println("chegou aqui ");
+
+        List<Produto> produtos = repository.findByName(nome);
+
+        System.out.println("chegou aqui 3, tamanho lista: " + produtos.size());
+
+        model.addAttribute("produtos", produtos);
+        return new ModelAndView("/produto/list");
+    }
+
 }

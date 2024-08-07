@@ -9,15 +9,19 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Transactional
@@ -27,7 +31,7 @@ import java.util.List;
 public class VendaController {
 
     @Autowired
-    VendaRepository repository;
+    VendaRepository vendaRepository;
 
     @Autowired
     private ProdutoRepository produtoRepository;
@@ -40,7 +44,7 @@ public class VendaController {
 
 
     public VendaController(){
-        repository = new VendaRepository();
+        vendaRepository = new VendaRepository();
     }
 
     @GetMapping("/adicionarCarrinho/{id}")
@@ -83,7 +87,7 @@ public class VendaController {
         venda.setPessoa(p);
         p.getVendas().add(venda);
 
-        repository.save(venda);
+        vendaRepository.save(venda);
         session.invalidate();
         return new ModelAndView("redirect:/venda/list");
     }
@@ -111,7 +115,7 @@ public class VendaController {
 
     @GetMapping("/list")
     public ModelAndView listar(ModelMap model) {
-        model.addAttribute("vendas", repository.Vendas());
+        model.addAttribute("vendas", vendaRepository.Vendas());
         return new ModelAndView("/venda/list");
     }
 
@@ -122,7 +126,7 @@ public class VendaController {
         if(result.hasErrors())
             return new ModelAndView("compra/list");
 
-        repository.save(venda);
+        vendaRepository.save(venda);
         return new ModelAndView("redirect:/venda/list");
     }
 
@@ -130,27 +134,42 @@ public class VendaController {
 
     @GetMapping("/remove/{id}")
     public ModelAndView remove(@PathVariable("id") Long id){
-        repository.remove(id);
+        vendaRepository.remove(id);
         return new ModelAndView("redirect:/venda/list");
     }
 
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("venda", repository.venda(id));
+        model.addAttribute("venda", vendaRepository.venda(id));
         return new ModelAndView("/venda/form", model);
     }
 
 
     @GetMapping("/list/{id}")
     public ModelAndView list(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("venda", repository.venda(id));
+        model.addAttribute("venda", vendaRepository.venda(id));
         return new ModelAndView("/venda/detalhes", model);
     }
 
     @PostMapping("/update")
     public ModelAndView update(Venda venda) {
-        repository.update(venda);
+        vendaRepository.update(venda);
         return new ModelAndView("redirect:/venda/list");
+    }
+
+
+
+    /* BUSCAS NOVAS POR HQL*/
+
+    @GetMapping("/filtrardata")
+    public String filtroVendasPorData(
+            @RequestParam("data") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime data, Model model) {
+
+        System.out.println("chegou aqui ");
+
+        List<Venda> vendas = vendaRepository.findByData(data);
+        model.addAttribute("vendas", vendas);
+        return "vendas";
     }
 
 

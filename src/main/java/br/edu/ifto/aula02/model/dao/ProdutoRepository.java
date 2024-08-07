@@ -1,5 +1,6 @@
 package br.edu.ifto.aula02.model.dao;
 
+import br.edu.ifto.aula02.model.entity.Pessoa;
 import br.edu.ifto.aula02.model.entity.Produto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -33,6 +34,17 @@ public class ProdutoRepository {
 
     public void update(Produto produto){
         em.merge(produto);
+    }
+
+
+    public List<Produto> findByName(String nome) {
+
+        System.out.println("chegou aqui 2 " + nome);
+
+
+        Query query = em.createQuery("FROM Produto p WHERE p.descricao = :nome");
+        query.setParameter("nome", nome);
+        return query.getResultList();
     }
 
 }

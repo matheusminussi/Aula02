@@ -4,7 +4,7 @@ insert into produto (descricao,valor)values ('Relogio', 20.00);
 insert into produto (descricao,valor)values ('Maionese', 9.00);
 
 /*TESTES DE PRODUTOS PARA AUMENTAR PAGINA */
-/*
+
 insert into produto (descricao,valor)values ('Maionese', 9.00);
 insert into produto (descricao,valor)values ('Maionese', 9.00);
 insert into produto (descricao,valor)values ('Maionese', 9.00);
@@ -23,7 +23,7 @@ insert into produto (descricao,valor)values ('Maionese', 9.00);
 insert into produto (descricao,valor)values ('Maionese', 9.00);
 insert into produto (descricao,valor)values ('Maionese', 9.00);
 insert into produto (descricao,valor)values ('Maionese', 9.00);
-*/
+
 
 
 /*Pessoa fisica*/
@@ -35,6 +35,10 @@ insert into pessoafisica (id_pessoa,cpf)values (5,'00000000000');
 
 insert into pessoa (id,nome)values (2,'Felipe');
 insert into pessoafisica (id_pessoa,cpf)values (2,'22222222222');
+
+insert into pessoa (id,nome)values (6,'Matheus');
+insert into pessoafisica (id_pessoa,cpf)values (6,'66666666666');
+
 
 /*Pessoa juridica*/
 insert into pessoa (id,nome)values (3,'Djoko');

@@ -1,0 +1,28 @@
+<!-- src/main/resources/templates/vendas.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vendas</title>
+</head>
+<body>
+<h1>Vendas</h1>
+<form th:action="@{venda/vendas/filtrar}" method="get">
+    <!-- O atributo th:action define a URL "/vendas/filtrar" para o formulário -->
+    <label for="data">Data:</label>
+    <input type="date" id="data" name="data">
+    <button type="submit">Filtrar</button>
+</form>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Data</th>
+        <th>Pessoa</th>
+    </tr>
+    <tr th:each="venda : ${vendas}">
+        <td th:text="${venda.id}"></td>
+        <td th:text="${#dates.format(venda.data, 'yyyy-MM-dd')}"></td>
+        <td th:text="${venda.pessoa.nome}"></td>
+    </tr>
+</table>
+</body>
+</html>

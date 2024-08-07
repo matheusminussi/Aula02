@@ -24,6 +24,17 @@
                 <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>
             </tr>
         </table>
+
+
+
+        <form th:action="@{/pessoa/filtrarnome}" method="get">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome">
+            <button type="submit">Filtrar</button>
+        </form>
+
+
+
     </main>
 </body>
 </html>

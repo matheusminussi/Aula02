@@ -24,6 +24,17 @@
                 <td> <a th:href="@{/venda/list/{id}(id=${v.id})}">Detalhes</a> </td>
                 </tr>
         </table>
+
+        <a th:href="@{/venda/vendas/filtrar}">BUSCAR</a>
+
+
+        <div>
+            <form th:action="@{/venda/filtrardata}" method="get">
+                <label for="data">Data:</label>
+                <input type="datetime-local" id="data" name="data">
+                <button type="submit">Filtrar</button>
+            </form>
+        </div>
     </main>
 
     <footer th:replace="~{fragments/footer :: footer}"></footer>

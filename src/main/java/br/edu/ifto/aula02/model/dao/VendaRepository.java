@@ -7,6 +7,9 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 
@@ -38,4 +41,14 @@ public class VendaRepository {
         em.merge(venda);
     }
 
+    public List<Venda> findByData(LocalDateTime data) {
+
+        System.out.println("chegou aqui 2" + data);
+
+
+
+        Query query = em.createQuery("FROM Venda v WHERE v.data = :data");
+        query.setParameter("data", data);
+        return query.getResultList();
+    }
 }
