@@ -1,14 +1,13 @@
 package br.edu.ifto.aula02.model.dao;
 
 import br.edu.ifto.aula02.model.entity.Pessoa;
-import br.edu.ifto.aula02.model.entity.Pessoafisica;
-import br.edu.ifto.aula02.model.entity.Venda;
+import br.edu.ifto.aula02.model.entity.PessoaFisica;
+import br.edu.ifto.aula02.model.entity.PessoaJuridica;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -21,8 +20,12 @@ public class PessoaRepository {
         em.persist(pessoa);
     }
 
-    public void saveFisica(Pessoafisica pf) {
+    public void saveFisica(PessoaFisica pf) {
         em.persist(pf);
+    }
+
+    public void saveJuridica(PessoaJuridica pj) {
+        em.persist(pj);
     }
 
     public Pessoa pessoa(Long id) {
@@ -41,6 +44,14 @@ public class PessoaRepository {
 
     public void update(Pessoa pessoa) {
         em.merge(pessoa);
+    }
+
+    public void updateFisica(PessoaFisica pessoafisica) {
+        em.merge(pessoafisica);
+    }
+
+    public void updateJuridica(PessoaJuridica pessoaJuridica) {
+        em.merge(pessoaJuridica);
     }
 
 

@@ -1,24 +1,16 @@
 package br.edu.ifto.aula02.controller;
 
 import br.edu.ifto.aula02.model.dao.PessoaRepository;
-import br.edu.ifto.aula02.model.dao.ProdutoRepository;
-import br.edu.ifto.aula02.model.entity.Pessoa;
-import br.edu.ifto.aula02.model.entity.Pessoafisica;
-import br.edu.ifto.aula02.model.entity.Produto;
-import br.edu.ifto.aula02.model.entity.Venda;
+import br.edu.ifto.aula02.model.entity.*;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Transactional
@@ -35,7 +27,7 @@ public class PessoaController {
     }
 
     @GetMapping("/form")
-    public ModelAndView form(Pessoafisica pessoa) {
+    public ModelAndView form(PessoaJuridica pessoajuridica, PessoaFisica pessoafisica) {
         return new ModelAndView("/pessoa/form");
     }
 
@@ -44,6 +36,8 @@ public class PessoaController {
         model.addAttribute("pessoas", repository.pessoas());
         return new ModelAndView("/pessoa/list");
     }
+
+
 
    /* @PostMapping("/save")
     public ModelAndView save(@ModelAttribute("pessoa")@Valid Pessoa pessoa, BindingResult result) {
@@ -54,14 +48,14 @@ public class PessoaController {
         return new ModelAndView("redirect:/pessoa/list");
     }*/
 
-    @PostMapping("/savepf")
-    public ModelAndView savepf(@ModelAttribute("pessoafisica")@Valid Pessoafisica pf, BindingResult result) {
+    /*@PostMapping("/savepf")
+    public ModelAndView savepf(@ModelAttribute("pessoafisica")@Valid PessoaFisica pf, BindingResult result) {
         if(result.hasErrors())
             return form(pf);
 
         repository.saveFisica(pf);
         return new ModelAndView("redirect:/pessoa/list");
-    }
+    }*/
 
     @GetMapping("/remove/{id}")
     public ModelAndView remove(@PathVariable("id") Long id) {

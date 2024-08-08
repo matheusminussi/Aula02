@@ -5,11 +5,13 @@ import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import org.springframework.context.annotation.Scope;
 
+import java.io.Serializable;
+
 @Scope("session")
 @Entity
 @Table(name="pessoajuridica")
 @PrimaryKeyJoinColumn(name="id_pessoa")
-public class Pessoajuridica extends Pessoa{
+public class PessoaJuridica extends Pessoa implements Serializable {
 
     private String cnpj;
 

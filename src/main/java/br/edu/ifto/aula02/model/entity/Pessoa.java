@@ -3,16 +3,17 @@ package br.edu.ifto.aula02.model.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "pessoa")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Pessoa {
+public abstract class Pessoa implements Serializable {
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @GeneratedValue
     private Long id;
     @NotBlank
     private String nome;
@@ -44,4 +45,13 @@ public abstract class Pessoa {
     public void setVendas(List<Venda> vendas) {
         this.vendas = vendas;
     }
+
+    public boolean tipoObjeto(String objeto){
+        return this.getClass().getSimpleName().toLowerCase().equals(objeto.toLowerCase());
+    }
+
+    public String nomeClasse(){
+        return this.getClass().getSimpleName().toLowerCase();
+    }
+
 }

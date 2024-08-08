@@ -43,11 +43,11 @@ public class VendaRepository {
 
     public List<Venda> findByData(LocalDateTime data) {
 
-        System.out.println("chegou aqui 2" + data);
+        System.out.println("chegou aqui 2 -- " + data);
 
 
 
-        Query query = em.createQuery("FROM Venda v WHERE v.data = :data");
+        Query query = em.createQuery("FROM Venda v WHERE v.data = to_char(:data)");
         query.setParameter("data", data);
         return query.getResultList();
     }

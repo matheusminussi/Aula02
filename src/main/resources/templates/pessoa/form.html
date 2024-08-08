@@ -5,20 +5,25 @@
 <head th:replace="~{fragments/head :: head(~{})}"></head>
 
 <body>
-    <main>
-        <h1>Cadastrar pessoa fisica</h1>
-            <form th:action="${pessoa.id == null} ? @{/pessoa/save} : @{/pessoa/update}" th:object="${pessoa}" method="post">
-                <input type="hidden" th:field="*{id}">
-                <div style="width: 20rem; height: 5rem; margin-top: 50px">
-                    <label>Nome:</label>
-                    <input type="text" th:field="*{nome}" th:errorclass="is-invalid" placeholder="Nome">
-                    <label class="invalid-feedback" th:if="${#fields.hasErrors('Nome')}" th:errors="*{nome}"></label>
-                </div>
+        <main>
 
-                <input type="submit" class="btn btn-primary btn-lg" value="Enviar">
+            <h1>Cadastro de clientes</h1>
+            <h3>Insira os dados</h3>
+
+            <form th:action="|/${pessoa.nomeClasse()}/${pessoa.id == null ? 'save' : 'update'}|"
+                  th:object="${pessoa}" method="post">
+                <input type="hidden" th:field="*{id}">
+                <input type="text" th:if="${pessoa.tipoObjeto('pessoafisica')}" th:field="*{nome}"  placeholder="Nome">
+                <input type="text" th:if="${pessoa.tipoObjeto('pessoajuridica')}" th:field="*{nome}"  placeholder="nome">
+                <input type="text" th:if="${pessoa.tipoObjeto('pessoafisica')}" th:field="*{cpf}"  placeholder="cpf">
+                <input type="text" th:if="${pessoa.tipoObjeto('pessoajuridica')}" th:field="*{cnpj}"  placeholder="cpnj">
+                <input type="submit" value="Enviar">
             </form>
-    </main>
+        </main>
+        <footer th:replace="~{fragments/footer :: footer}"></footer>
 
 </body>
-</html>
 
+
+
+</html>
