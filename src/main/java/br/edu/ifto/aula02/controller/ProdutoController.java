@@ -90,4 +90,17 @@ public class ProdutoController {
         return new ModelAndView("/produto/list");
     }
 
+    @GetMapping("/filtrarnomecompra")
+    public ModelAndView filtrarNomeCompra(String nome, Model model) {
+
+        System.out.println("chegou aqui ");
+
+        List<Produto> produtos = repository.findByName(nome);
+
+        System.out.println("chegou aqui 3, tamanho lista: " + produtos.size());
+
+        model.addAttribute("produtos", produtos);
+        return new ModelAndView("/compra/list");
+    }
+
 }

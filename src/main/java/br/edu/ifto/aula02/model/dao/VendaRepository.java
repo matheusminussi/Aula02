@@ -41,13 +41,13 @@ public class VendaRepository {
         em.merge(venda);
     }
 
-    public List<Venda> findByData(LocalDateTime data) {
+    public List<Venda> findByData(LocalDate data) {
 
-        System.out.println("chegou aqui 2 -- " + data);
+        System.out.println("chegou repository -- " + data);
 
 
 
-        Query query = em.createQuery("FROM Venda v WHERE v.data = to_char(:data)");
+        Query query = em.createQuery("FROM Venda v WHERE v.data = :data");
         query.setParameter("data", data);
         return query.getResultList();
     }

@@ -83,7 +83,7 @@ public class VendaController {
     public ModelAndView finalizarCarrinho(HttpSession session) {
 
         Pessoa p = pessoaRepository.pessoa(1L);
-        venda.setData(LocalDateTime.now());
+        venda.setData(LocalDate.now());
         venda.setPessoa(p);
         p.getVendas().add(venda);
 
@@ -162,14 +162,14 @@ public class VendaController {
     /* BUSCAS NOVAS POR HQL*/
 
     @GetMapping("/filtrardata")
-    public String filtroVendasPorData(
-            @RequestParam("data") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDateTime data, Model model) {
+    public ModelAndView filtroVendasPorData(
+            @RequestParam("data") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data, Model model) {
 
-        System.out.println("chegou aqui ");
+        System.out.println("chegou no VendaController ");
 
         List<Venda> vendas = vendaRepository.findByData(data);
         model.addAttribute("vendas", vendas);
-        return "vendas";
+        return new ModelAndView("venda/list");
     }
 
 

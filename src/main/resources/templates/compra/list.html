@@ -11,28 +11,14 @@
         <h2>Produtos a venda</h2>
     </div>
 
-    <!--Tabela antiga de amostragem de produto usar so no list de administrador
 
-    <table class="table" border="1">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Descricao</th>
-            <th>Valor</th>
-            <th colspan="2">Ações</th>
-        </tr>
-        </thead>
-        <tr th:each="p : ${produtos}">
-            <td th:text="${p.id}"> </td>
-            <td th:text="${p.descricao}"> </td>
-            <td th:text="${p.valor}"> </td>
-
-            <td> <a th:href="@{/carrinho/adicionarCarrinho/{id}(id=${p.id})}">Comprar</a> </td>
-
-        </tr>
-    </table>
-
-    -->
+    <div>
+        <form th:action="@{/produto/filtrarnomecompra}" method="get">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome">
+            <button type="submit">Filtrar</button>
+        </form>
+    </div>
 
     <div class="row justify-content-around">
         <div class="card" style="width: 15rem; height: 10rem; margin-top: 50px"  th:each="p : ${produtos}">

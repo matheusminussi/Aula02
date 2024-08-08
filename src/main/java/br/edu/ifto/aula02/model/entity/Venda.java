@@ -19,7 +19,7 @@ public class Venda implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-    private LocalDateTime data;
+    private LocalDate data;
 
     @OneToMany(mappedBy = "venda",cascade = CascadeType.ALL)
     private List<ItemVenda> itens = new ArrayList<>();
@@ -43,11 +43,11 @@ public class Venda implements Serializable {
         this.id = id;
     }
 
-    public LocalDateTime getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(LocalDateTime data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

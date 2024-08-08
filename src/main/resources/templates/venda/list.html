@@ -20,18 +20,17 @@
                 <td th:text="${v.id}"> </td>
                 <td th:text="${v.pessoa.nome}"> </td>
                 <td th:text="${v.Total()}"> </td>
-                <td th:text="${v.data.toLocalDate()}"> </td>
+                <td th:text="${v.data}"> </td>
                 <td> <a th:href="@{/venda/list/{id}(id=${v.id})}">Detalhes</a> </td>
                 </tr>
         </table>
 
-        <a th:href="@{/venda/vendas/filtrar}">BUSCAR</a>
 
 
         <div>
             <form th:action="@{/venda/filtrardata}" method="get">
                 <label for="data">Data:</label>
-                <input type="datetime-local" id="data" name="data">
+                <input type="date" id="data" name="data">
                 <button type="submit">Filtrar</button>
             </form>
         </div>
