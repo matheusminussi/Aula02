@@ -22,6 +22,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Transactional
@@ -51,32 +52,59 @@ public class VendaController {
     public ModelAndView adicionarCarrinho(@PathVariable Long id, HttpSession session) {
 
         Produto produto = produtoRepository.produto(id);//acho o produto pelo id
-        ItemVenda item = new ItemVenda(); //cria o item
+        Venda venda = (Venda) session.getAttribute("venda"); // Obtém a venda (carrinho) da sessão
 
-        item.setProduto(produto);
-        item.setQuantidade(1.0);
-        item.setVenda(venda); // diz pro item qual a venda ele ta linkado
+        if (venda == null) {
+            venda = new Venda(); // Se não houver venda na sessão, cria uma nova
+        }
+        boolean itemExists = false;
+        // Percorre os itens da venda para verificar se o produto já está no carrinho
+        for (ItemVenda item : venda.getItens()) {
+            if (item.getProduto().getId().equals(produto.getId())) {
+                item.setQuantidade(item.getQuantidade() + 1.0); // Aumenta a quantidade se já existir
+                itemExists = true;
+                break;
+            }
+        }
+        // Se o item não existir, adiciona no carrinho
+        if (!itemExists) {
+            ItemVenda novoItem = new ItemVenda();
+            novoItem.setProduto(produto);
+            novoItem.setQuantidade(1.0);
+            novoItem.setVenda(venda); // Vincula o item na venda
+            venda.getItens().add(novoItem);
+        }
 
-
-        venda.getItens().add(item);// adiciona o item na lista de itens da venda
+        session.setAttribute("venda", venda); // Atualiza a venda na sessão
 
         return new ModelAndView("/compra/view");
-
     }
 
     @GetMapping("/removerCarrinho/{id}")
-    public ModelAndView removerCarrinho(@PathVariable Long id) {
+    public ModelAndView removerCarrinho(@PathVariable Long id, HttpSession session) {
 
-        Produto produto = produtoRepository.produto(id);
-        ItemVenda item = new ItemVenda();
+        Produto produto = produtoRepository.produto(id); // acho o produto pelo id
+        Venda venda = (Venda) session.getAttribute("venda"); // acho a venda (carrinho) da sessão
 
-        item.setProduto(produto);
-        item.setQuantidade(1.0);
+        if (venda != null) {
+            Iterator<ItemVenda> iterator = venda.getItens().iterator();
 
-        venda.getItens().remove(item);
+            while (iterator.hasNext()) {
+                ItemVenda item = iterator.next();
 
+                if (item.getProduto().getId().equals(produto.getId())) {
+                    if (item.getQuantidade() > 1.0) {
+                        item.setQuantidade(item.getQuantidade() - 1.0); // Diminui a quantidade se for maior que 1
+                    } else {
+                        iterator.remove(); // Remove o item se a quantidade for 1
+                    }
+                    break;
+                }
+            }
+
+            session.setAttribute("venda", venda);
+        }
         return new ModelAndView("/compra/view");
-
     }
 
     @GetMapping("/finalizarCarrinho")
