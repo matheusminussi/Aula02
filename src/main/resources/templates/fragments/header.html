@@ -1,7 +1,8 @@
-
-<header class="container" th:fragment="header">
+<header class="container" th:fragment="header" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <link rel="stylesheet" href="/css/estilo.css">
 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
+
         <div class="container-fluid">
             <a class="navbar-brand" th:href="@{/venda/listarProdutos}">LOJA</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,17 +10,25 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                    <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
                         <a class="nav-link active" aria-current="page" th:href="@{/venda/list}">Vendas</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
                         <a class="nav-link active" aria-current="page" th:href="@{/produto/list}">Produtos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/pessoa/list}">Pessoas</a>
-                    </li>
-                    <li class="nav-item dropdown">
+
+                    <li class="nav-item dropdown" sec:authorize="hasAnyRole('ADMIN')">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Pessoas
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/pessoafisica/list}">Fisica</a></li>
+                            <li><a class="dropdown-item" th:href="@{/pessoajuridica/list}">Juridica</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown" sec:authorize="hasAnyRole('ADMIN')">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
                             Cadastrar
                         </a>
                         <ul class="dropdown-menu">
@@ -31,8 +40,13 @@
                             <li><a class="dropdown-item" href="#">Funcionario</a></li>
                         </ul>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link">Sair</a>
+
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit">SAIR TESTE</button>
+                        </form>
+
                     </li>
 
                     <li class="nav-item">

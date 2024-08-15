@@ -15,7 +15,7 @@ public abstract class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-    @NotBlank
+    @NotBlank(message = "É obrigatorio inserir o nome")
     private String nome;
 
     @OneToMany(mappedBy = "pessoa")

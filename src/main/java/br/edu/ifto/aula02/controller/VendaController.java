@@ -32,7 +32,7 @@ import java.util.List;
 public class VendaController {
 
     @Autowired
-    VendaRepository vendaRepository;
+    private VendaRepository vendaRepository;
 
     @Autowired
     private ProdutoRepository produtoRepository;

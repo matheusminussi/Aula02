@@ -31,7 +31,7 @@ insert into pessoa (nome)values ('Matheus');
 insert into pessoafisica (id_pessoa,cpf)values (1,'11111111111');
 
 insert into pessoa (nome)values ('root');
-insert into pessoafisica (id_pessoa,cpf)values (2,'00000000000');
+insert into pessoafisica (id_pessoa,cpf)values (2,'458468456488');
 
 insert into pessoa (nome)values ('Felipe');
 insert into pessoafisica (id_pessoa,cpf)values (3,'22222222222');

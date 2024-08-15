@@ -1,0 +1,14 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.navbar-left,
+.navbar-right {
+    display: flex;
+}
+
+.navbar-right {
+    margin-left: auto;
+}

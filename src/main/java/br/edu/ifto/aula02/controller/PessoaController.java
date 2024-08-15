@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -33,29 +34,14 @@ public class PessoaController {
 
     @GetMapping("/list")
     public ModelAndView listar(ModelMap model) {
-        model.addAttribute("pessoas", repository.pessoas());
+        List<Pessoa> pessoas = repository.pessoas();
+
+        System.out.println("antes de buscar pessoas e adicionar no model");
+        model.addAttribute("pessoas", pessoas);
+        System.out.println("depois de adicionar no model");
         return new ModelAndView("/pessoa/list");
     }
 
-
-
-   /* @PostMapping("/save")
-    public ModelAndView save(@ModelAttribute("pessoa")@Valid Pessoa pessoa, BindingResult result) {
-        if(result.hasErrors())
-            return form(pessoa);
-
-        repository.save(pessoa);
-        return new ModelAndView("redirect:/pessoa/list");
-    }*/
-
-    /*@PostMapping("/savepf")
-    public ModelAndView savepf(@ModelAttribute("pessoafisica")@Valid PessoaFisica pf, BindingResult result) {
-        if(result.hasErrors())
-            return form(pf);
-
-        repository.saveFisica(pf);
-        return new ModelAndView("redirect:/pessoa/list");
-    }*/
 
     @GetMapping("/remove/{id}")
     public ModelAndView remove(@PathVariable("id") Long id) {

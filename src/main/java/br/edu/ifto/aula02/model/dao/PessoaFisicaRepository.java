@@ -1,8 +1,8 @@
 package br.edu.ifto.aula02.model.dao;
 
+
 import br.edu.ifto.aula02.model.entity.Pessoa;
 import br.edu.ifto.aula02.model.entity.PessoaFisica;
-import br.edu.ifto.aula02.model.entity.PessoaJuridica;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
@@ -11,50 +11,33 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class PessoaRepository {
-
+public class PessoaFisicaRepository {
     @PersistenceContext
     private EntityManager em;
-
-    public void save(Pessoa pessoa) {
-        em.persist(pessoa);
-    }
 
     public void saveFisica(PessoaFisica pf) {
         em.persist(pf);
     }
 
-    public void saveJuridica(PessoaJuridica pj) {
-        em.persist(pj);
+    public PessoaFisica pessoaFisica(Long id) {
+        return em.find(PessoaFisica.class, id);
     }
 
-    public Pessoa pessoa(Long id) {
-        return em.find(Pessoa.class, id);
-    }
-
-    public List<Pessoa> pessoas() {
+    public List<PessoaFisica> pessoasFisica() {
 
         System.out.println("antes de fazer a busca");
-        Query query = em.createQuery("from Pessoa");
+        Query query = em.createQuery("from PessoaFisica ");
         System.out.println("depois da busca");
         return query.getResultList();
     }
 
     public void remove(Long id) {
-        Pessoa p = em.find(Pessoa.class, id);
-        em.remove(p);
-    }
-
-    public void update(Pessoa pessoa) {
-        em.merge(pessoa);
+        PessoaFisica pf = em.find(PessoaFisica.class, id);
+        em.remove(pf);
     }
 
     public void updateFisica(PessoaFisica pessoafisica) {
         em.merge(pessoafisica);
-    }
-
-    public void updateJuridica(PessoaJuridica pessoaJuridica) {
-        em.merge(pessoaJuridica);
     }
 
 

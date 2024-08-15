@@ -10,6 +10,8 @@
             <h1>Cadastro de clientes</h1>
             <h3>Insira os dados</h3>
 
+            <div class="alert alert-danger" th:errors="${pessoa.*}"></div>
+
             <form th:action="|/${pessoa.nomeClasse()}/${pessoa.id == null ? 'save' : 'update'}|"
                   th:object="${pessoa}" method="post">
                 <input type="hidden" th:field="*{id}">
