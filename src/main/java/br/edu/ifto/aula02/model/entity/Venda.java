@@ -22,7 +22,6 @@ public class Venda implements Serializable {
     private Long id;
     private LocalDate data;
 
-    @Min(1)
     @OneToMany(mappedBy = "venda",cascade = CascadeType.ALL)
     private List<ItemVenda> itens = new ArrayList<>();
 

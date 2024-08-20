@@ -28,14 +28,17 @@ public class SecurityConfiguration {
                                         .requestMatchers("/pessoafisica/form").permitAll()
                                         .requestMatchers("/pessoafisica/list").hasAnyRole("ADMIN")
                                         .requestMatchers(HttpMethod.POST,"/pessoafisica/save").permitAll()
+                                        .requestMatchers("/venda/finalizarCarrinho").hasAnyRole("ADMIN")
+                                        .requestMatchers(HttpMethod.GET,"/venda/finalizarCarrinho").hasAnyRole("ADMIN")
+                                        .requestMatchers(HttpMethod.GET,"/venda/list").hasAnyRole("ADMIN")
+                                        .requestMatchers("/venda/list").hasAnyRole("ADMIN")
                                         .anyRequest() //define que a configuração é válida para qualquer requisição.
                                         .authenticated() //define que o usuário precisa estar autenticado.
                 )
                 .formLogin(customizer ->
                         customizer
                                 .loginPage("/login") //passamos como parâmetro a URL para acesso à página de login que criamos
-                                .failureForwardUrl("/pessoafisica/form")
-                                .defaultSuccessUrl("/venda/list", true)
+                                .defaultSuccessUrl("/venda/listarProdutos", true)
                                 .permitAll() //define que essa página pode ser acessada por todos, independentemente do usuário estar autenticado ou não.
                 )
                 .httpBasic(withDefaults()) //configura a autenticação básica (usuário e senha)
