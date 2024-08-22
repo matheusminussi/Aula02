@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+
+<body>
+    <main>
+        <h1>Pessoas cadastradas JURIDICAS</h1>
+
+        <table class="table" border="1">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>nome</th>
+                <th colspan="2">Ações</th>
+            </tr>
+            </thead>
+            <tr th:each="p : ${pessoas}">
+                <td th:text="${p.id}"> </td>
+                <td th:text="${p.nome}"> </td>
+
+                <td> <a th:href="@{/pessoajuridica/edit/{id}(id=${p.id})}">Editar</a> </td>
+                <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoajuridica/remove/{id}(id=${p.id})}">Excluir</a> </td>
+            </tr>
+        </table>
+
+
+
+        <form th:action="@{/pessoajuridica/filtrarnome}" method="get">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome">
+            <button type="submit">Filtrar</button>
+        </form>
+
+
+
+    </main>
+</body>
+</html>
