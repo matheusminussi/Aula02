@@ -50,4 +50,8 @@ public class Role implements Serializable, GrantedAuthority {
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
+
+
+
+
 }

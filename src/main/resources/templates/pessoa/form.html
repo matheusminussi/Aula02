@@ -20,6 +20,9 @@
                 <input type="text" th:if="${pessoa.tipoObjeto('pessoafisica')}" th:field="*{cpf}"  placeholder="cpf">
                 <input type="text" th:if="${pessoa.tipoObjeto('pessoajuridica')}" th:field="*{cnpj}"  placeholder="cpnj">
 
+                <input type="text" th:field="*{usuario.login}"  placeholder="Username">
+                <input type="text" th:field="*{usuario.password}"  placeholder="password">
+
 
 
                 <input type="submit" value="Enviar">

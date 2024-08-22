@@ -33,8 +33,8 @@ public class SecurityConfiguration {
                                         .requestMatchers("/pessoafisica/form").permitAll()
                                         .requestMatchers("/pessoafisica/list").hasAnyRole("ADMIN")
                                         .requestMatchers(HttpMethod.POST,"/pessoafisica/save").permitAll()
-                                        .requestMatchers("/venda/finalizarCarrinho").hasAnyRole("ADMIN")
-                                        .requestMatchers(HttpMethod.GET,"/venda/finalizarCarrinho").hasAnyRole("ADMIN")
+                                        .requestMatchers("/venda/finalizarCarrinho").hasAnyRole("USER")
+                                        .requestMatchers(HttpMethod.GET,"/venda/finalizarCarrinho").hasAnyRole("USER")
                                         .requestMatchers(HttpMethod.GET,"/venda/list").hasAnyRole("ADMIN")
                                         .requestMatchers("/venda/list").hasAnyRole("ADMIN")
                                         .anyRequest() //define que a configuração é válida para qualquer requisição.

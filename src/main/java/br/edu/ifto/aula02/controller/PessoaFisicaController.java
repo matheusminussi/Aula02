@@ -2,7 +2,9 @@ package br.edu.ifto.aula02.controller;
 
 
 import br.edu.ifto.aula02.model.dao.PessoaFisicaRepository;
+import br.edu.ifto.aula02.model.dao.RoleRepository;
 import br.edu.ifto.aula02.model.entity.PessoaFisica;
+import br.edu.ifto.aula02.model.entity.Role;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class PessoaFisicaController {
 
     @Autowired
     PessoaFisicaRepository pessoaFisicaRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
 
     @GetMapping("/form")
     public ModelAndView form(PessoaFisica pessoaFisica, ModelMap model){
@@ -42,6 +47,9 @@ public class PessoaFisicaController {
     public ModelAndView save(@ModelAttribute("pessoa")@Valid PessoaFisica pessoaFisica,BindingResult result){
         if(result.hasErrors())
             return form(pessoaFisica,new ModelMap());
+
+        Role r = roleRepository.role("ROLE_USER");
+        pessoaFisica.getUsuario().getRoles().add(r);
 
         System.out.println("Antes do saveFisica");
         pessoaFisicaRepository.saveFisica(pessoaFisica);
