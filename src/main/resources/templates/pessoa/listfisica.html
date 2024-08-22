@@ -21,7 +21,7 @@
                 <td th:text="${p.nome}"> </td>
 
                 <td> <a th:href="@{/pessoas/edit/{id}(id=${p.id})}">Editar</a> </td>
-                <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoas/remove/{id}(id=${p.id})}">Excluir</a> </td>
+                <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pessoafisica/remove/{id}(id=${p.id})}">Excluir</a> </td>
             </tr>
         </table>
 

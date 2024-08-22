@@ -41,6 +41,11 @@ and open the template in the editor.
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Login</button>
                             </div>
+                            <div>
+                                <h5>Não possui cadastro?</h5>
+                                <a th:href="@{/pessoafisica/form}">Cadastrar pessoa fisica</a>
+                                <a th:href="@{/pessoajuridica/form}">cadastrar pessoa juridica</a>
+                            </div>
                         </form>
                     </div>
                 </div>

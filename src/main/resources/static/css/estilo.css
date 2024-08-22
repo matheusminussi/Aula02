@@ -4,11 +4,18 @@
     padding: 10px;
 }
 
-.navbar-left,
-.navbar-right {
+#navbar-left,
+#navbar-right {
     display: flex;
+    justify-content: space-between;
+
 }
 
-.navbar-right {
-    margin-left: auto;
+#navbar-right {
+    margin-right: 100px;
+}
+
+#testebotao:hover{
+
+        color: #ff0000; /* Cor do link quando o mouse está sobre ele */
 }

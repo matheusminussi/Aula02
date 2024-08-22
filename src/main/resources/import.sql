@@ -61,3 +61,19 @@ insert into item_venda (quantidade,produto_id,venda_id)values (2,1,1);
 insert into item_venda (quantidade,produto_id,venda_id)values (1,2,2);
 insert into item_venda (quantidade,produto_id,venda_id)values (2,3,3);
 insert into item_venda (quantidade,produto_id,venda_id)values (3,3,3);
+
+
+
+/*Usuario e roles*/
+
+
+insert into Role (nome)values ('ROLE_USER');
+insert into Role (nome)values ('ROLE_ADMIN');
+
+
+insert into Usuario (login, password)values ('user', '$2a$10$oA6m2EUOluJNrqJEGMYRseH1CsvX4lOTywubmmZ15lGxxOii6Gp4S');
+insert into Usuario (login, password)values ('admin', '$2a$10$4p2H2mA2LwPYKqJgJhftfuz2GJwTBWUgfyEzop7ikv9H25mNtmrOi');
+
+
+insert into usuario_roles (roles_id, usuarios_id)values (1, 1);
+insert into usuario_roles (roles_id, usuarios_id)values (2, 2);

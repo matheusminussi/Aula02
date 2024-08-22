@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -25,7 +22,7 @@ import java.util.List;
 public class PessoaJuridicaController {
 
     @Autowired
-    PessoaJuridicaRepository repository;
+    PessoaJuridicaRepository pessoaJuridicaRepository;
 
 
     @GetMapping("/form")
@@ -39,25 +36,30 @@ public class PessoaJuridicaController {
         if(result.hasErrors())
             return form(pessoaJuridica,new ModelMap());
 
-        repository.saveJuridica(pessoaJuridica);
-        return new ModelAndView("redirect:/pessoa/list");
+        pessoaJuridicaRepository.saveJuridica(pessoaJuridica);
+        return new ModelAndView("redirect:/pessoajuridica/list");
     }
 
 
     @PostMapping("/update")
     public ModelAndView update(PessoaJuridica pj) {
-
-        repository.updateJuridica(pj);
-        return new ModelAndView("redirect:/pessoa/list");
+        pessoaJuridicaRepository.updateJuridica(pj);
+        return new ModelAndView("redirect:/pessoajuridica/list");
     }
 
     @GetMapping("/list")
     public ModelAndView listar(ModelMap model) {
-        List<PessoaJuridica> pessoas = repository.pessoasJuridica();
+        List<PessoaJuridica> pessoas = pessoaJuridicaRepository.pessoasJuridica();
 
         System.out.println("antes de buscar pessoas e adicionar no model");
         model.addAttribute("pessoas", pessoas);
         System.out.println("depois de adicionar no model");
-        return new ModelAndView("/pessoa/list");
+        return new ModelAndView("/pessoa/listJuridica");
+    }
+
+    @GetMapping("/remove/{id}")
+    public ModelAndView remove(@PathVariable("id") Long id) {
+        pessoaJuridicaRepository.remove(id);
+        return new ModelAndView("redirect:/pessoajuridica/list");
     }
 }

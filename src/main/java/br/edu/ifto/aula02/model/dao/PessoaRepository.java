@@ -16,28 +16,8 @@ public class PessoaRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public void save(Pessoa pessoa) {
-        em.persist(pessoa);
-    }
-
-    public void saveFisica(PessoaFisica pf) {
-        em.persist(pf);
-    }
-
-    public void saveJuridica(PessoaJuridica pj) {
-        em.persist(pj);
-    }
-
     public Pessoa pessoa(Long id) {
         return em.find(Pessoa.class, id);
-    }
-
-    public List<Pessoa> pessoas() {
-
-        System.out.println("antes de fazer a busca");
-        Query query = em.createQuery("from Pessoa");
-        System.out.println("depois da busca");
-        return query.getResultList();
     }
 
     public void remove(Long id) {
@@ -47,14 +27,6 @@ public class PessoaRepository {
 
     public void update(Pessoa pessoa) {
         em.merge(pessoa);
-    }
-
-    public void updateFisica(PessoaFisica pessoafisica) {
-        em.merge(pessoafisica);
-    }
-
-    public void updateJuridica(PessoaJuridica pessoaJuridica) {
-        em.merge(pessoaJuridica);
     }
 
 

@@ -13,6 +13,9 @@
                     <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
                         <a class="nav-link active" aria-current="page" th:href="@{/venda/list}">Vendas</a>
                     </li>
+                    <li class="nav-item" sec:authorize="hasAnyRole('USER')">
+                        <a class="nav-link active" aria-current="page" th:href="@{/venda/list}">Minhas compras</a>
+                    </li>
                     <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
                         <a class="nav-link active" aria-current="page" th:href="@{/produto/list}">Produtos</a>
                     </li>
@@ -40,23 +43,13 @@
                             <li><a class="dropdown-item" href="#">Funcionario</a></li>
                         </ul>
                     </li>
-
-                    <li class="nav-item">
-
-                        <form th:action="@{/logout}" method="post">
-                            <button type="submit">SAIR TESTE</button>
-                        </form>
-
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/venda/listCarrinho}">CARRINHO</a>
-                    </li>
+                    <form th:action="@{/logout}" method="post">
+                        <button class="btn btn-outline-danger" type="submit">SAIR</button>
+                    </form>
                 </ul>
-                <!--<form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>-->
+
+                <a class="nav-link active" aria-current="page" th:href="@{/venda/listCarrinho}">CARRINHO</a>
+
             </div>
         </div>
     </nav>

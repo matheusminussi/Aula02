@@ -19,6 +19,9 @@
                 <input type="text" th:if="${pessoa.tipoObjeto('pessoajuridica')}" th:field="*{nome}"  placeholder="nome">
                 <input type="text" th:if="${pessoa.tipoObjeto('pessoafisica')}" th:field="*{cpf}"  placeholder="cpf">
                 <input type="text" th:if="${pessoa.tipoObjeto('pessoajuridica')}" th:field="*{cnpj}"  placeholder="cpnj">
+
+
+
                 <input type="submit" value="Enviar">
             </form>
         </main>

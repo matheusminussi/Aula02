@@ -11,7 +11,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -21,37 +20,22 @@ import java.util.List;
 public class PessoaController {
 
     @Autowired
-    PessoaRepository repository;
+    PessoaRepository pessoaRepository;
 
     public PessoaController(){
-        repository = new PessoaRepository();
-    }
-
-    @GetMapping("/form")
-    public ModelAndView form(PessoaJuridica pessoajuridica, PessoaFisica pessoafisica) {
-        return new ModelAndView("/pessoa/form");
-    }
-
-    @GetMapping("/list")
-    public ModelAndView listar(ModelMap model) {
-        List<Pessoa> pessoas = repository.pessoas();
-
-        System.out.println("antes de buscar pessoas e adicionar no model");
-        model.addAttribute("pessoas", pessoas);
-        System.out.println("depois de adicionar no model");
-        return new ModelAndView("/pessoa/list");
+        pessoaRepository = new PessoaRepository();
     }
 
 
     @GetMapping("/remove/{id}")
     public ModelAndView remove(@PathVariable("id") Long id) {
-        repository.remove(id);
+        pessoaRepository.remove(id);
         return new ModelAndView("redirect:/pessoa/list");
     }
 
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("pessoa", repository.pessoa(id));
+        model.addAttribute("pessoa", pessoaRepository.pessoa(id));
         return new ModelAndView("/pessoa/form", model);
     }
 
@@ -62,12 +46,12 @@ public class PessoaController {
 
         System.out.println("chegou aqui ");
 
-        List<Pessoa> pessoas = repository.findByName(nome);
+        List<Pessoa> pessoas = pessoaRepository.findByName(nome);
 
         System.out.println("chegou aqui 3, tamanho lista: " + pessoas.size());
 
         model.addAttribute("pessoas", pessoas);
-        return new ModelAndView("/pessoa/list");
+        return new ModelAndView("listfisica");
     }
 
 
