@@ -1,30 +1,25 @@
 /*cria o produto */
-insert into produto (descricao,valor)values ('Camisa', 10.00);
-insert into produto (descricao,valor)values ('Relogio', 20.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
 
-/*TESTES DE PRODUTOS PARA AUMENTAR PAGINA */
+INSERT INTO produto (descricao, valor) VALUES ('mouse optico', 49.90);
+INSERT INTO produto (descricao, valor) VALUES ('mouse gamer', 199.90);
+INSERT INTO produto (descricao, valor) VALUES ('mouse sem fio', 79.90);
 
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
-insert into produto (descricao,valor)values ('Maionese', 9.00);
+INSERT INTO produto (descricao, valor) VALUES ('teclado mecanico', 299.90);
+INSERT INTO produto (descricao, valor) VALUES ('teclado gamer', 399.90);
+INSERT INTO produto (descricao, valor) VALUES ('teclado sem fio', 159.90);
 
+INSERT INTO produto (descricao, valor) VALUES ('monitor led 24"', 899.00);
+INSERT INTO produto (descricao, valor) VALUES ('monitor curvo 27"', 1499.00);
+INSERT INTO produto (descricao, valor) VALUES ('monitor 21.5"', 699.00);
 
+INSERT INTO produto (descricao, valor) VALUES ('fonte 500w', 259.90);
+
+INSERT INTO produto (descricao, valor) VALUES ('mouse pad gamer', 49.90);
+INSERT INTO produto (descricao, valor) VALUES ('mouse pad xxl', 79.90);
+INSERT INTO produto (descricao, valor) VALUES ('mouse pad rgb', 99.90);
+
+INSERT INTO produto (descricao, valor) VALUES ('suporte 1 monitor', 199.90);
+INSERT INTO produto (descricao, valor) VALUES ('suporte 2 monitor', 89.90);
 
 /*Pessoa fisica*/
 insert into pessoa (nome)values ('Matheus');

@@ -10,6 +10,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,9 +56,7 @@ public class VendaController {
         Produto produto = produtoRepository.produto(id);//acho o produto pelo id
         Venda venda = (Venda) session.getAttribute("venda"); // Obtém a venda (carrinho) da sessão
 
-        if (venda == null) {
-            venda = new Venda(); // Se não houver venda na sessão, cria uma nova
-        }
+
         boolean itemExists = false;
         // Percorre os itens da venda para verificar se o produto já está no carrinho
         for (ItemVenda item : venda.getItens()) {
@@ -109,15 +109,20 @@ public class VendaController {
 
     @GetMapping("/finalizarCarrinho")
     public ModelAndView finalizarCarrinho(HttpSession session) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(auth.getName());
 
-        Pessoa p = pessoaRepository.pessoa(1L);
+        Pessoa p2 = pessoaRepository.findByNameUser(auth.getName());
+
+       // Pessoa p = pessoaRepository.pessoa(1L);
         venda.setData(LocalDate.now());
-        venda.setPessoa(p);
-        p.getVendas().add(venda);
+        venda.setPessoa(p2);
+        p2.getVendas().add(venda);
 
         vendaRepository.save(venda);
-        session.invalidate();
-        return new ModelAndView("redirect:/venda/list");
+        session.removeAttribute("venda");
+
+        return new ModelAndView("redirect:/venda/minhasCompras");
     }
 
 
@@ -146,6 +151,20 @@ public class VendaController {
         model.addAttribute("vendas", vendaRepository.Vendas());
         return new ModelAndView("/venda/list");
     }
+
+
+
+    @GetMapping("/minhasCompras")
+    public ModelAndView minhasCompras(ModelMap model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        Pessoa p = pessoaRepository.findByNameUser(auth.getName());
+
+        model.addAttribute("vendas", vendaRepository.findVendaByNome(p));
+        return new ModelAndView("/venda/list");
+    }
+
 
 
 

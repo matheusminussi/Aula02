@@ -42,8 +42,8 @@ public class ProdutoRepository {
         System.out.println("chegou aqui 2 " + nome);
 
 
-        Query query = em.createQuery("FROM Produto p WHERE p.descricao = :nome");
-        query.setParameter("nome", nome);
+        Query query = em.createQuery("FROM Produto p WHERE p.descricao LIKE LOWER(:nome)");
+        query.setParameter("nome", "%" + nome.toLowerCase() + "%");
         return query.getResultList();
     }
 

@@ -7,16 +7,13 @@
 <body>
 <main>
 
-    <div>
+
+    <div style="margin-right: 531px">
         <h2>Produtos a venda</h2>
-    </div>
-
-
-    <div>
-        <form th:action="@{/produto/filtrarnomecompra}" method="get">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome">
-            <button type="submit">Filtrar</button>
+        <form style="display: flex" th:action="@{/produto/filtrarnomecompra}" method="get">
+            <label for="nome"></label>
+            <input class="form-control me-2" type="text" id="nome" name="nome" placeholder="Buscar produtos">
+            <button class="btn btn-outline-success" type="submit">Filtrar</button>
         </form>
     </div>
 

@@ -1,6 +1,8 @@
 package br.edu.ifto.aula02.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,7 +20,6 @@ public class Usuario implements Serializable, UserDetails {
 
     @Column(unique = true)
     private String login;
-
     private String password;
 
     @ManyToMany

@@ -1,5 +1,6 @@
 package br.edu.ifto.aula02.model.dao;
 
+import br.edu.ifto.aula02.model.entity.Pessoa;
 import br.edu.ifto.aula02.model.entity.Produto;
 import br.edu.ifto.aula02.model.entity.Venda;
 import jakarta.persistence.EntityManager;
@@ -45,10 +46,20 @@ public class VendaRepository {
 
         System.out.println("chegou repository -- " + data);
 
-
-
         Query query = em.createQuery("FROM Venda v WHERE v.data = :data");
         query.setParameter("data", data);
         return query.getResultList();
     }
+
+
+    public List<Venda> findVendaByNome(Pessoa pessoa){
+        Long pessoaId = pessoa.getId();
+
+
+        Query query = em.createQuery("FROM Venda v WHERE v.pessoa.id = :pessoaId");
+        query.setParameter("pessoaId", pessoaId);
+        return query.getResultList();
+
+    }
+
 }

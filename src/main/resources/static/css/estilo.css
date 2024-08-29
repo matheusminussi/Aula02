@@ -15,7 +15,10 @@
     margin-right: 100px;
 }
 
-#testebotao:hover{
+body{
+    background-color: #EBEBEB;
+}
 
-        color: #ff0000; /* Cor do link quando o mouse está sobre ele */
+table{
+    background-color:#FFFFFF ;
 }

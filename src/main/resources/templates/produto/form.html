@@ -11,7 +11,7 @@
                 <input type="hidden" th:field="*{id}">
                 <div style="width: 20rem; height: 5rem; margin-top: 50px">
                     <label>Nome do produto:</label>
-                    <input type="text" th:field="*{descricao}" th:errorclass="is-invalid" placeholder="descricao">
+                    <input type="text" th:field="*{descricao}" th:errorclass="is-invalid" placeholder="Nome">
                     <label class="invalid-feedback" th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></label>
                 </div>
 
