@@ -30,7 +30,7 @@ public class Produto implements Serializable {
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        this.descricao = descricao.toLowerCase();
     }
 
     public double getValor() {

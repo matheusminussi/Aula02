@@ -31,6 +31,8 @@ public class SecurityConfiguration {
                         customizer ->
                                 customizer
                                         .requestMatchers("/pessoafisica/form").permitAll()
+                                        .requestMatchers("/pessoajuridica/form").permitAll()
+                                        .requestMatchers(HttpMethod.POST,"/pessoajuridica/save").permitAll()
                                         .requestMatchers("/pessoafisica/list").hasAnyRole("ADMIN")
                                         .requestMatchers(HttpMethod.POST,"/pessoafisica/save").permitAll()
                                         .requestMatchers("/venda/finalizarCarrinho").hasAnyRole("USER")
